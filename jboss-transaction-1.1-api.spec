@@ -7,7 +7,7 @@
 
 Name:             %{?scl_prefix}%{pkg_name}
 Version:          1.0.1
-Release:          8.10%{?dist}
+Release:          8.11%{?dist}
 Summary:          Transaction 1.1 API
 License:          CDDL or GPLv2 with exceptions
 Url:              http://www.jboss.org
@@ -16,16 +16,16 @@ Url:              http://www.jboss.org
 # cd jboss-transaction-1.1-api/ && git archive --format=tar --prefix=jboss-transaction-1.1-api/ jboss-transaction-api_1.1_spec-1.0.1.Final | xz > jboss-transaction-1.1-api-1.0.1.Final.tar.xz
 Source0:          %{pkg_name}-%{namedversion}.tar.xz
 
-BuildRequires:    maven30-jboss-specs-parent
+BuildRequires:    %{?scl_prefix}jboss-specs-parent
 BuildRequires:    %{?scl_prefix_java_common}javapackages-tools
 BuildRequires:    %{?scl_prefix_java_common}maven-local
-BuildRequires:    maven30-maven-compiler-plugin
-BuildRequires:    maven30-maven-install-plugin
-BuildRequires:    maven30-maven-jar-plugin
-BuildRequires:    maven30-maven-javadoc-plugin
-BuildRequires:    maven30-maven-enforcer-plugin
-BuildRequires:    maven30-maven-dependency-plugin
-BuildRequires:    maven30-maven-clean-plugin
+BuildRequires:    %{?scl_prefix}maven-compiler-plugin
+BuildRequires:    %{?scl_prefix}maven-install-plugin
+BuildRequires:    %{?scl_prefix}maven-jar-plugin
+BuildRequires:    %{?scl_prefix}maven-javadoc-plugin
+BuildRequires:    %{?scl_prefix}maven-enforcer-plugin
+BuildRequires:    %{?scl_prefix}maven-dependency-plugin
+BuildRequires:    %{?scl_prefix}maven-clean-plugin
 
 BuildArch:        noarch
 
@@ -42,13 +42,13 @@ This package contains the API documentation for %{pkg_name}.
 %setup -q -n jboss-transaction-1.1-api
 
 %build
-%{?scl:scl enable maven30 %{scl} - <<"EOF"}
+%{?scl:scl enable %{scl} - <<"EOF"}
 set -e -x
 mvn-rpmbuild install javadoc:aggregate
 %{?scl:EOF}
 
 %install
-%{?scl:scl enable maven30 %{scl} - <<"EOF"}
+%{?scl:scl enable %{scl} - <<"EOF"}
 set -e -x
 install -d -m 755 $RPM_BUILD_ROOT%{_javadir}
 install -d -m 755 $RPM_BUILD_ROOT%{_mavenpomdir}
@@ -75,6 +75,9 @@ cp -rp target/site/apidocs/* $RPM_BUILD_ROOT%{_javadocdir}/%{name}
 %doc LICENSE.txt
 
 %changelog
+* Mon Jan 11 2016 Michal Srb <msrb@redhat.com> - 1.0.1-8.11
+- maven33 rebuild #2
+
 * Sat Jan 09 2016 Michal Srb <msrb@redhat.com> - 1.0.1-8.10
 - maven33 rebuild
 
