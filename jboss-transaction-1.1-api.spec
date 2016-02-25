@@ -7,7 +7,7 @@
 
 Name:             %{?scl_prefix}%{pkg_name}
 Version:          1.0.1
-Release:          8.11%{?dist}
+Release:          8.12%{?dist}
 Summary:          Transaction 1.1 API
 License:          CDDL or GPLv2 with exceptions
 Url:              http://www.jboss.org
@@ -18,7 +18,7 @@ Source0:          %{pkg_name}-%{namedversion}.tar.xz
 
 BuildRequires:    %{?scl_prefix}jboss-specs-parent
 BuildRequires:    %{?scl_prefix_java_common}javapackages-tools
-BuildRequires:    %{?scl_prefix_java_common}maven-local
+BuildRequires:    %{?scl_prefix}maven-local
 BuildRequires:    %{?scl_prefix}maven-compiler-plugin
 BuildRequires:    %{?scl_prefix}maven-install-plugin
 BuildRequires:    %{?scl_prefix}maven-jar-plugin
@@ -75,6 +75,9 @@ cp -rp target/site/apidocs/* $RPM_BUILD_ROOT%{_javadocdir}/%{name}
 %doc LICENSE.txt
 
 %changelog
+* Mon Feb 08 2016 Michal Srb <msrb@redhat.com> - 1.0.1-8.12
+- Fix BR on maven-local & co.
+
 * Mon Jan 11 2016 Michal Srb <msrb@redhat.com> - 1.0.1-8.11
 - maven33 rebuild #2
 
